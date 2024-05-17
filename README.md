@@ -99,6 +99,8 @@ Get a list of all characters.
   // ... other characters
 ]
 ```
+
+
 #### `GET /api/characters`
 
 
