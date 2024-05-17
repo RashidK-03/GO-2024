@@ -45,11 +45,10 @@ The project is based on Avatar: Aang cartoon-serial.
 
 ### Relationships
 
-- The `characters` table may have a foreign key `place_id` that relates to the `places` table, indicating the location affiliation of a character.
+- The `characters` table may have a foreign key `affiliation_id` that relates to the `affiliation` table, indicating the location affiliation of a character.
 
-- If characters have specific bending abilities listed in the `abilities` column, you might consider creating a separate table for abilities and establishing a many-to-many relationship between `characters` and `abilities`.
+- If characters have specific bending abilities listed in the `ability` column, you might consider creating a separate table for abilities and establishing a many-to-many relationship between `characters` and `ability`.
 
-Feel free to adjust the table structure and relationships based on your project's specific needs.
 
 ## API Endpoints
 
