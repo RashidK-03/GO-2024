@@ -15,33 +15,41 @@ The project is based on Avatar: Aang cartoon-serial.
 
 #### `characters`
 
-| Column       | Type    | Description                       |
-|--------------|---------|-----------------------------------|
-| id           | SERIAL  | Unique identifier for the character|
-| name         | VARCHAR | Full name of the character        |
-| age          | INTEGER | Age of the character              |
-| gender       | VARCHAR | Gender of the character           |
-| affiliation  | VARCHAR | Affiliation of the character      |
-| abilities    | VARCHAR | Special abilities of the character|
-| image        | VARCHAR | URL of the character's image      |
+The `characters` table contains the following columns:
+
+| Column Name       | Data Type | Description                                  |
+|-------------------|-----------|----------------------------------------------|
+| `id`              | INT       | Primary key, unique identifier for each character. |
+| `name`            | VARCHAR   | The name of the character.                   |
+| `description`     | TEXT      | A detailed description of the character.     |
+| `age`             | INT       | The age of the character.                    |
+| `affiliation_id`  | INT       | Foreign key linking to the `affiliation` table. |
+| `created_at`      | TIMESTAMP | Timestamp when the character was created.    |
+| `updated_at`      | TIMESTAMP | Timestamp when the character was last updated. |
 
 #### `affiliation`
 
-| Column | Type    | Description                   |
-|--------|---------|-------------------------------|
-| id     | SERIAL  | Unique identifier for the place|
-| name   | VARCHAR | Name of the location           |
-| type   | VARCHAR | Type or affiliation of the place|
-| image  | VARCHAR | URL of the place's image       |
+The `affiliation` table contains the following columns:
+
+| Column Name       | Data Type | Description                                  |
+|-------------------|-----------|----------------------------------------------|
+| `id`              | INT       | Primary key, unique identifier for each affiliation. |
+| `name`            | VARCHAR   | The name of the affiliation.                 |
+| `description`     | TEXT      | A detailed description of the affiliation.   |
+| `created_at`      | TIMESTAMP | Timestamp when the affiliation was created.  |
+| `updated_at`      | TIMESTAMP | Timestamp when the affiliation was last updated. |
 
 #### `ability`
 
-| Column      | Type    | Description                    |
-|-------------|---------|--------------------------------|
-| id          | SERIAL  | Unique identifier for the element|
-| name        | VARCHAR | Name of the bending element     |
-| description | TEXT    | Description of the bending element|
-| image       | VARCHAR | URL of the element's image      |
+The `ability` table contains the following columns:
+
+| Column Name       | Data Type | Description                                  |
+|-------------------|-----------|----------------------------------------------|
+| `id`              | INT       | Primary key, unique identifier for each ability. |
+| `name`            | VARCHAR   | The name of the ability.                     |
+| `description`     | TEXT      | A detailed description of the ability.       |
+| `created_at`      | TIMESTAMP | Timestamp when the ability was created.      |
+| `updated_at`      | TIMESTAMP | Timestamp when the ability was last updated. |
 
 ### Relationships
 
@@ -57,6 +65,20 @@ The project is based on Avatar: Aang cartoon-serial.
 The base URL for all API endpoints is `https://your-api-domain.com`.
 
 ### Characters
+
+- **Get All Characters**: `/characters` (GET)
+- **Get Character by ID**: `/characters/{id}` (GET)
+- **Create a New Character**: `/characters` (POST)
+- **Update a Character**: `/characters/{id}` (PUT)
+- **Delete a Character**: `/characters/{id}` (DELETE)
+
+#### Permissions
+
+Certain endpoints require specific permissions to be accessed:
+
+- `POST /characters`: Requires `characters:read` permission.
+- `PUT /characters/{id}`: Requires `characters:write` permission.
+- `DELETE /characters/{id}`: Requires `characters:write` permission.
 
 #### `GET /api/characters`
 
@@ -77,10 +99,25 @@ Get a list of all characters.
   // ... other characters
 ]
 ```
+#### `GET /api/characters`
 
-### Places
 
-#### `GET /api/places`
+### Affiliation
+
+- **Get All Affiliations**: `/affiliations` (GET)
+- **Get Affiliation by ID**: `/affiliations/{id}` (GET)
+- **Create a New Affiliation**: `/affiliations` (POST)
+- **Update an Affiliation**: `/affiliations/{id}` (PUT)
+- **Delete an Affiliation**: `/affiliations/{id}` (DELETE)
+  
+#### Permissions
+
+- `POST /affiliations`: Requires `affiliations:write` permission.
+- `PUT /affiliations/{id}`: Requires `affiliations:write` permission.
+- `DELETE /affiliations/{id}`: Requires `affiliations:write` permission.
+
+
+#### `GET /api/affiliation`
 
 Get a list of all places.
 
@@ -96,7 +133,19 @@ Get a list of all places.
 ]
 ```
 
-### Elements
+### Ability
+
+- **Get All Abilities**: `/abilities` (GET)
+- **Get Ability by ID**: `/abilities/{id}` (GET)
+- **Create a New Ability**: `/abilities` (POST)
+- **Update an Ability**: `/abilities/{id}` (PUT)
+- **Delete an Ability**: `/abilities/{id}` (DELETE)
+
+#### Permissions
+
+- `POST /abilities`: Requires `abilities:write` permission.
+- `PUT /abilities/{id}`: Requires `abilities:write` permission.
+- `DELETE /abilities/{id}`: Requires `abilities:write` permission.
 
 #### `GET /api/elements`
 
@@ -113,3 +162,24 @@ Get a list of all elements.
   // ... other elements
 ]
 ```
+
+## Error Handling
+
+Custom error handlers are implemented for common HTTP errors:
+
+- `404 Not Found`: Triggered when a requested resource does not exist.
+- `405 Method Not Allowed`: Triggered when an HTTP method is not supported by a route.
+
+## Middleware
+
+The application uses middleware for authentication and authorization:
+
+- **Authentication Middleware**: Ensures that the user is authenticated before accessing any routes.
+- **Authorization Middleware**: Checks if the user has the required permissions to access specific routes.
+
+## Running the Application
+
+To run the application, use the following command:
+
+```sh
+go run main.go
