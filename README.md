@@ -25,7 +25,7 @@ The project is based on Avatar: Aang cartoon-serial.
 | abilities    | VARCHAR | Special abilities of the character|
 | image        | VARCHAR | URL of the character's image      |
 
-#### `places`
+#### `affiliation`
 
 | Column | Type    | Description                   |
 |--------|---------|-------------------------------|
@@ -34,7 +34,7 @@ The project is based on Avatar: Aang cartoon-serial.
 | type   | VARCHAR | Type or affiliation of the place|
 | image  | VARCHAR | URL of the place's image       |
 
-#### `elements`
+#### `ability`
 
 | Column      | Type    | Description                    |
 |-------------|---------|--------------------------------|
